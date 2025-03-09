@@ -5,8 +5,9 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const [Email, setEmail] = useState("rizwan@gmail.com");
-  const [Password, setPassword] = useState("Rizwan@123");
+  const [Email, setEmail] = useState("sahil@gmail.com");
+  const [Password, setPassword] = useState("Sahil@123");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Login = async () => {
@@ -24,7 +25,9 @@ const Login = () => {
       navigate("/");
       return;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      // console.log(err.response.data);
+      setError(err?.response?.data || "Something went wrong");
     }
   };
   return (
@@ -59,6 +62,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
+            <p className="text-red-500">{error && `Error: ${error}`}</p>
           </div>
           <div className="card-actions justify-center">
             <button className="btn mt-3 " onClick={Login}>
