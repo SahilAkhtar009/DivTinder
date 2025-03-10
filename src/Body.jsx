@@ -33,7 +33,7 @@ const Body = () => {
     fetchUser();
   }, []);
   return (
-    <div className="bg-zinc-800  text-white  ">
+    <div className="bg-zinc-800 h-screen text-white  ">
       <Navbar />
       <Outlet />
       <Footer />

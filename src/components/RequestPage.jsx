@@ -2,16 +2,27 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/Constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../utils/RequestSlice";
+import { addRequest, removeRequest } from "../utils/RequestSlice";
 
 const RequestPage = () => {
   const dispatch = useDispatch();
   const allRequest = useSelector((store) => store.request);
+  // console.log(allRequest);
+
+  const requestHandler = async (status, _id) => {
+    const res = await axios.post(
+      BASE_URL + "/request/review/" + status + "/" + _id,
+      {},
+      { withCredentials: true }
+    );
+
+    dispatch(removeRequest(_id));
+  };
   const Requests = async () => {
     const res = await axios.get(BASE_URL + "/user/requests/recieved", {
       withCredentials: true,
     });
-    console.log(res.data.data);
+
     dispatch(addRequest(res.data.data));
   };
   useEffect(() => {
@@ -46,9 +57,17 @@ const RequestPage = () => {
               )}
             </div>
             <div className="flex gap-5 px-4">
-              <button className="btn btn-active btn-primary">Primary</button>
-              <button className="btn btn-active btn-secondary">
-                Secondary
+              <button
+                className="btn btn-active btn-primary"
+                onClick={() => requestHandler("rejected", req._id)}
+              >
+                Reject
+              </button>
+              <button
+                className="btn btn-active btn-secondary"
+                onClick={() => requestHandler("accepted", req._id)}
+              >
+                Accept
               </button>
             </div>
           </div>
