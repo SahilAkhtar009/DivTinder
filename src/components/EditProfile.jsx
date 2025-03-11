@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import UserCard from "./UserCard";
 import { BASE_URL } from "../utils/Constant";
 import axios from "axios";
-import { addFeed } from "../utils/feedSlice";
 import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [age, setAge] = useState(user.age);
-  const [gender, setGender] = useState(user.gender);
-  const [photo, setPhoto] = useState(user.photo);
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [photo, setPhoto] = useState(user.photo || "");
   const [ToatShow, setToatShow] = useState(false);
   const dispatch = useDispatch();
   const UpdateProfile = async () => {
@@ -23,7 +23,7 @@ const EditProfile = ({ user }) => {
         }
       );
       console.log(res.data);
-      dispatch(addFeed(res.data));
+      dispatch(addUser(res.data));
       setToatShow(true);
       setTimeout(() => {
         setToatShow(false);
@@ -35,21 +35,21 @@ const EditProfile = ({ user }) => {
 
   return (
     user && (
-      <div className="flex justify-center items-center p-2 m-4 gap-10">
-        <div className="flex justify-center mt-4">
-          <div className="card bg-zinc-700 h-[100%] w-96">
+      <div className="flex justify-center items-center py-2  gap-10 bg-zinc-800 ">
+        <div className="flex justify-center shrink h-1/2 ">
+          <div className="card bg-zinc-700  w-86 h-116">
             <div className="card-body">
               <h2 className="card-title flex justify-center">Profile !</h2>
               <div className="text-black">
                 <label className="form-control w-full max-w-xs">
                   <div className="label">
-                    <span className="label-text text-white mt-3 py-1">
+                    <span className="label-text text-white  py-1">
                       FirstName
                     </span>
                   </div>
                   <input
                     type="text"
-                    className="input  w-full max-w-xs"
+                    className="input  w-full max-w-xs h-8"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
@@ -62,7 +62,7 @@ const EditProfile = ({ user }) => {
                   </div>
                   <input
                     type="text"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full max-w-xs h-8"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                   />
@@ -73,7 +73,7 @@ const EditProfile = ({ user }) => {
                   </div>
                   <input
                     type="text"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full max-w-xs h-8"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
                   />
@@ -86,7 +86,7 @@ const EditProfile = ({ user }) => {
                   </div>
                   <input
                     type="text"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full max-w-xs h-8"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                   />
@@ -99,14 +99,14 @@ const EditProfile = ({ user }) => {
                   </div>
                   <input
                     type="text"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full max-w-xs h-8"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
                   />
                 </label>
               </div>
               <div className="card-actions justify-center">
-                <button className="btn mt-3 " onClick={UpdateProfile}>
+                <button className="btn mt-2  h-8" onClick={UpdateProfile}>
                   Save Profile
                 </button>
               </div>

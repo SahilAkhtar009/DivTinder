@@ -19,18 +19,19 @@ const Connections = () => {
   useEffect(() => {
     Connections();
   }, []);
+
   if (!ConnectionUser) {
     return;
   }
   if (ConnectionUser.length === 0) return <h1>No Connections Found</h1>;
   return (
-    <div className="text-center m-4 p-2 flex flex-col items-center">
-      <h1 className="text-2xl">Connections</h1>
+    <div className="text-center py-5 flex flex-col items-center bg-zinc-800">
+      <h1 className="text-2xl font-bold">Connections</h1>
       {ConnectionUser.map((con, index) => {
         const { firstName, lastName, photo, age, gender } = con;
         return (
           <div
-            className=" rounded-md  flex p-2 items-center gap-2 mt-2 w-1/2 h-25 bg-zinc-700"
+            className=" rounded-md  flex p-2 px-7 items-center  mt-2 w-1/2 h-25 bg-zinc-700 "
             key={index}
           >
             <img
@@ -40,7 +41,7 @@ const Connections = () => {
               width="100"
               height="100"
             />
-            <div>
+            <div className="ml-[15vw]">
               <h3 className="text-1xl">
                 {firstName} {lastName}
               </h3>

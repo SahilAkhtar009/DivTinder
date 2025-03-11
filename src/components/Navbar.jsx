@@ -17,7 +17,7 @@ const Navbar = () => {
         {},
         { withCredentials: true }
       );
-      console.log(islogOut);
+
       if (islogOut) {
         dispatch(removeUser());
         navigate("/login");

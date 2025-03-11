@@ -30,7 +30,7 @@ const RequestPage = () => {
   }, []);
 
   return (
-    <div className="text-center m-4 p-2 flex flex-col items-center">
+    <div className="text-center  p-2 flex flex-col items-center bg-zinc-800">
       <h1 className="text-2xl">ConnectionsRequests</h1>
       {allRequest.map((req, index) => {
         const { firstName, lastName, photo, age, gender } = req.fromUserId;
